@@ -1,5 +1,5 @@
 const EmailLog = require('../models/EamilLog')
-const transporter = require('../config/mailer')
+const transporter = require('../middleware/mailer')
 
 exports.sendEmail = async (req, res) => {
   const { to, subject, message } = req.body;
@@ -31,10 +31,10 @@ exports.sendEmail = async (req, res) => {
     log.messageId = info.messageId;
     await log.save();
 
-    return res.status(200).json({ 
-      success: true, 
-      message: 'Email dispatched successfully', 
-      messageId: info.messageId 
+    return res.status(200).json({
+      success: true,
+      message: 'Email dispatched successfully',
+      messageId: info.messageId
     });
 
   } catch (error) {
@@ -43,10 +43,10 @@ exports.sendEmail = async (req, res) => {
     log.errorDetails = error.message;
     await log.save();
 
-    return res.status(500).json({ 
-      success: false, 
-      error: 'Email delivery failed', 
-      details: error.message 
+    return res.status(500).json({
+      success: false,
+      error: 'Email delivery failed',
+      details: error.message
     });
   }
 };

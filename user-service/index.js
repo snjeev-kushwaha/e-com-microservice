@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-
+const config = require('./config/index')
 const authRoutes = require('./routes/authRoutes');
 
 const { connectDB } = require('./db/db');
@@ -16,6 +16,6 @@ app.use('/', authRoutes);
 
 connectDB();
 
-app.listen(process.env.PORT, () => {
-    console.log(`Auth Service Running on ${process.env.PORT}`);
+app.listen(config.PORT, () => {
+    console.log(`Auth Service Running on ${config.PORT}`);
 });
