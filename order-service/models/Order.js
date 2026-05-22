@@ -4,9 +4,7 @@ const config = require('../config/index')
 
 // ================= DATABASE CONNECTION =================
 
-mongoose.connect(config.MONGO_URI, {
-    dbName: "orderDB"
-})
+mongoose.connect(config.MONGO_URI)
     .then(() => {
         console.log("MongoDB Connected");
     })

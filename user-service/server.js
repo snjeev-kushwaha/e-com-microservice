@@ -3,15 +3,15 @@ const express = require('express');
 const cors = require('cors');
 const config = require('./config/index')
 const authRoutes = require('./routes/authRoutes');
-
-const { connectDB } = require('./db/db');
+const connectDB = require('./db/db');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use('/', authRoutes);
+app.get('/health', (req, res) => res.send('service running.'))
+app.use('/user', authRoutes);
 
 connectDB();
 

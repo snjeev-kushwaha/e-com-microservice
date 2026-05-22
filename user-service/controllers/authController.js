@@ -1,27 +1,18 @@
 const bcrypt = require('bcryptjs');
-
-const { getDB } = require('../db/db');
-
+const User = require('../models/userModel')
 const generateToken = require('../utils/generateToken');
 
 async function register(req, res) {
-
+    console.log('++++++++++++++++++++++++===:', req.body)
     try {
-
-        const db = getDB();
-
         const {
             name,
             email,
             password
         } = req.body;
 
-        const existingUser = await db
-            .collection('users')
-            .findOne({ email });
-
+        const existingUser = await User.findOne({ email });
         if (existingUser) {
-
             return res.status(400).json({
                 message: 'User already exists'
             });
@@ -39,10 +30,7 @@ async function register(req, res) {
             createdAt: new Date()
         };
 
-        const result = await db
-            .collection('users')
-            .insertOne(user);
-
+        const result = await User.insertOne(user);
         res.status(201).json({
             message: 'User registered',
             result
@@ -59,20 +47,13 @@ async function register(req, res) {
 async function login(req, res) {
 
     try {
-
-        const db = getDB();
-
         const {
             email,
             password
         } = req.body;
 
-        const user = await db
-            .collection('users')
-            .findOne({ email });
-
+        const user = await User.findOne({ email });
         if (!user) {
-
             return res.status(400).json({
                 message: 'Invalid email'
             });
@@ -84,14 +65,12 @@ async function login(req, res) {
         );
 
         if (!isMatch) {
-
             return res.status(400).json({
                 message: 'Invalid password'
             });
         }
 
         const token = generateToken(user);
-
         res.json({
             token,
             user: {
@@ -102,7 +81,6 @@ async function login(req, res) {
         });
 
     } catch (error) {
-
         res.status(500).json({
             message: error.message
         });
