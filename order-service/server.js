@@ -22,5 +22,5 @@ app.use("/api/orders", orderRoutes);
 
 // SERVER
 app.listen(config.PORT, () => {
-    console.log(`Server Running On Port ${process.env.PORT}`);
+    console.log(`Server Running On Port ${config.PORT}`);
 });

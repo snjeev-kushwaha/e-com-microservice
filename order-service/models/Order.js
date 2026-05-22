@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-
+const config = require('../config/index')
 
 // ================= DATABASE CONNECTION =================
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(config.MONGO_URI, {
     dbName: "orderDB"
 })
-.then(() => {
-    console.log("MongoDB Connected");
-})
-.catch((error) => {
-    console.log("Database Error:", error);
-});
+    .then(() => {
+        console.log("MongoDB Connected");
+    })
+    .catch((error) => {
+        console.log("Database Error:", error);
+    });
 
 
 // ================= ORDER SCHEMA =================
