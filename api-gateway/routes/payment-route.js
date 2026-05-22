@@ -6,7 +6,7 @@ const routes = ['payment']
 module.exports = (app) => {
     routes.forEach((route) => {
         app.use(`/api/v1/${route}`, createProxyMiddleware({
-            target: config.services.PAYMENT_ROUTES,
+            target: config.services.PAYMENET_ROUTES,
             changeOrigin: true,
             pathRewrite: {
                 [`^/api/v1/${route}`]: '',
