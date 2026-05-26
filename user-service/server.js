@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/health', (req, res) => res.send('service running.'))
-app.use('/user', authRoutes);
+app.use('/', authRoutes);
 
 connectDB();
 
