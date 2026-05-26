@@ -5,7 +5,7 @@ const {
   createPayment,
   getPaymentById,
   refundPayment,
-} = require("../controller/paymentcontroller");
+} = require("../controller/paymentController");
 
 router.post("/payments", createPayment);
 router.get("/payments/:id", getPaymentById);
