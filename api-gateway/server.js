@@ -17,6 +17,7 @@ paymentRoutes(app)
 orderRoutes(app)
 notificationRoutes(app)
 
+app.get('/health', (req, res) => res.send('server running!'))
 
 app.listen(config.PORT, () => {
     console.log(`server started on port ${config.PORT}`)

@@ -10,10 +10,11 @@ services:
     volumes:
       - mongo-data:/data/db
     networks:
-      - microservice-network
+      - e-com-network
 
   apigateway:
     build: ./api-gateway
+    container_name: apigateway
     ports:
       - "4000:4000"
     environment:
@@ -25,10 +26,11 @@ services:
       - product-service
       - notification-service
     networks:
-      - microservice-network
+      - e-com-network
 
   user-service:
     build: ./user-service
+    container_name: userservice
     ports:
       - "4001:4001"
     environment:
@@ -36,10 +38,11 @@ services:
     depends_on:
       - mongodb
     networks:
-      - microservice-network
+      - e-com-network
 
   order-service:
     build: ./order-service
+    container_name: orderservice
     ports:
       - "4002:4002"
     environment:
@@ -47,10 +50,11 @@ services:
     depends_on:
       - mongodb
     networks:
-      - microservice-network
+      - e-com-network
 
   payment-service:
     build: ./payment-service
+    container_name: paymentservice
     ports:
       - "4003:4003"
     environment:
@@ -58,10 +62,11 @@ services:
     depends_on:
       - mongodb
     networks:
-      - microservice-network
+      - e-com-network
 
   product-service:
     build: ./product-service
+    container_name: productservice
     ports:
       - "4004:4004"
     environment:
@@ -69,20 +74,21 @@ services:
     depends_on:
       - mongodb
     networks:
-      - microservice-network
+      - e-com-network
 
   notification-service:
     build: ./notification-service
+    container_name: notification
     ports:
       - "4005:4005"
     environment:
       NODE_ENV: local
     networks:
-      - microservice-network
+      - e-com-network
 
 volumes:
   mongo-data:
 
 networks:
-  microservice-network:
+  e-com-network:
     driver: bridge
