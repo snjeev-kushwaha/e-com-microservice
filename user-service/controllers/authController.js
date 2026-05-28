@@ -45,7 +45,6 @@ async function register(req, res) {
 }
 
 async function login(req, res) {
-
     try {
         const {
             email,
@@ -70,7 +69,7 @@ async function login(req, res) {
             });
         }
 
-        const token = generateToken(user);
+        const token = await generateToken(user);
         res.json({
             token,
             user: {
@@ -81,6 +80,7 @@ async function login(req, res) {
         });
 
     } catch (error) {
+        console.log('+++++++++++++++++++++++++++++===', error)
         res.status(500).json({
             message: error.message
         });
